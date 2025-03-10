@@ -1,0 +1,47 @@
+[
+    {
+      "id": "uuid1",
+      "name": "Rule One",
+      "file": "rule_one.json",
+      "description": "This is the first detection rule.",
+      "platforms": ["Windows"],
+      "validated": false,
+      "severity": "Medium",
+      "status": "production",
+      "categories": ["Execution", "InitialAccess"],
+      "authors": ["Source B"],
+      "date": null,
+      "modifiedDate": "2024-10-02T22:43:27.7956732Z",
+      "lastCommitId": "8d15f0cbbbc13073582f8e5754afcc52bc2376a4",
+      "falsePositives": [],
+      "relatedTechniques": ["attack.t1059", "attack.t1190"],
+      "detectionSource": "Source B",
+      "ruleType": "json",
+      "query": "query language",
+      "queryFrequency": "",
+      "queryPeriod": ""
+    },
+    {
+      "id": "uuid2",
+      "name": "Rule Two",
+      "file": "rule_two.yaml",
+      "description": "This is the second detection rule.",
+      "platforms": "windows",
+      "validated": false,
+      "severity": "High",
+      "status": "production",
+      "categories": [],
+      "authors": "name",
+      "date": "2025-01-08T00:00:00.000Z",
+      "modifiedDate": "2025-01-08T00:00:00.000Z",
+      "lastCommitId": "298b62af35559440db01f0a85df6d53f6a44d1da",
+      "falsePositives": [
+        "Particular web applications may spawn a shell process legitimately"
+      ],
+      "relatedTechniques": ["attack.t1505", "attack.t1505.003", "attack.t1190"],
+      "detectionSource": "process_creation",
+      "ruleType": "yaml",
+      "query": "query language"
+    }
+  ]
+  

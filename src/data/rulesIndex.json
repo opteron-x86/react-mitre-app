@@ -1,0 +1,915 @@
+{
+    "metadata": {
+      "totalRules": 25,
+      "uniqueRuleCount": 25,
+      "techniqueCount": 18,
+      "generatedAt": "2025-01-15T14:30:00.000Z",
+      "sourceABranch": "main",
+      "sourceBBranch": "dev",
+      "sources": [
+        { "type": "repository", "path": "https://github.com/org/security-rules" },
+        { "type": "api", "path": "https://api.security.org/rules/v1" }
+      ]
+    },
+    "rules": [
+      {
+        "id": "rule-001",
+        "name": "Suspicious PowerShell Command Execution",
+        "file": "windows/process_creation/powershell_suspicious.yaml",
+        "description": "Detects suspicious PowerShell command execution with encoded commands or downloading content.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Execution", "Defense Evasion"],
+        "authors": ["Security Team"],
+        "date": "2024-02-15T00:00:00.000Z",
+        "modifiedDate": "2024-09-10T15:22:33.123Z",
+        "lastCommitId": "ab12cd34ef56gh78ij90",
+        "falsePositives": ["Administrative PowerShell scripts", "Legitimate software installation"],
+        "relatedTechniques": ["T1059.001", "T1059"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation.command_line: *powershell* AND process_creation.command_line: (*-enc* OR *-encodedcommand* OR *-e * OR *FromBase64String* OR *downloadstring* OR *downloadfile*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+    "techniqueIndex": {
+      "T1059.001": {
+        "techniqueId": "T1059.001",
+        "rules": [
+          {
+            "id": "rule-001",
+            "name": "Suspicious PowerShell Command Execution"
+          },
+          {
+            "id": "rule-020",
+            "name": "Suspicious PowerShell Script Block Logging"
+          }
+        ],
+        "ruleCount": 2
+      },
+      "T1059": {
+        "techniqueId": "T1059",
+        "rules": [
+          {
+            "id": "rule-001",
+            "name": "Suspicious PowerShell Command Execution"
+          },
+          {
+            "id": "rule-005",
+            "name": "Suspicious Execution from Temporary Directory"
+          }
+        ],
+        "ruleCount": 2
+      },
+      "T1003": {
+        "techniqueId": "T1003",
+        "rules": [
+          {
+            "id": "rule-002",
+            "name": "Credential Dumping via Mimikatz"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1003.001": {
+        "techniqueId": "T1003.001",
+        "rules": [
+          {
+            "id": "rule-002",
+            "name": "Credential Dumping via Mimikatz"
+          },
+          {
+            "id": "rule-017",
+            "name": "Suspicious LSASS Process Access"
+          }
+        ],
+        "ruleCount": 2
+      },
+      "T1546.003": {
+        "techniqueId": "T1546.003",
+        "rules": [
+          {
+            "id": "rule-003",
+            "name": "Persistence via WMI Event Subscription"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1047": {
+        "techniqueId": "T1047",
+        "rules": [
+          {
+            "id": "rule-004",
+            "name": "Suspicious Process Creation via WMIC"
+          },
+          {
+            "id": "rule-024",
+            "name": "WMI Lateral Movement Detection"
+          }
+        ],
+        "ruleCount": 2
+      },
+      "T1218": {
+        "techniqueId": "T1218",
+        "rules": [
+          {
+            "id": "rule-004",
+            "name": "Suspicious Process Creation via WMIC"
+          },
+          {
+            "id": "rule-005",
+            "name": "Suspicious Execution from Temporary Directory"
+          }
+        ],
+        "ruleCount": 2
+      },
+      "T1218.011": {
+        "techniqueId": "T1218.011",
+        "rules": [
+          {
+            "id": "rule-006",
+            "name": "Rundll32 with Suspicious Arguments"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1558.003": {
+        "techniqueId": "T1558.003",
+        "rules": [
+          {
+            "id": "rule-007",
+            "name": "Potential Kerberoasting Activity"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1547.001": {
+        "techniqueId": "T1547.001",
+        "rules": [
+          {
+            "id": "rule-008",
+            "name": "Suspicious Registry Modification for Persistence"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1112": {
+        "techniqueId": "T1112",
+        "rules": [
+          {
+            "id": "rule-008",
+            "name": "Suspicious Registry Modification for Persistence"
+          },
+          {
+            "id": "rule-016",
+            "name": "Defense Evasion via Registry Modification"
+          }
+        ],
+        "ruleCount": 2
+      },
+      "T1505.003": {
+        "techniqueId": "T1505.003",
+        "rules": [
+          {
+            "id": "rule-009",
+            "name": "Web Shell Detection via Process Creation"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1071": {
+        "techniqueId": "T1071",
+        "rules": [
+          {
+            "id": "rule-010",
+            "name": "Suspicious Network Connections"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1571": {
+        "techniqueId": "T1571",
+        "rules": [
+          {
+            "id": "rule-010",
+            "name": "Suspicious Network Connections"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1548.001": {
+        "techniqueId": "T1548.001",
+        "rules": [
+          {
+            "id": "rule-011",
+            "name": "Linux Privilege Escalation via SUID Binary"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1543.001": {
+        "techniqueId": "T1543.001",
+        "rules": [
+          {
+            "id": "rule-012",
+            "name": "macOS Persistence via Launch Agents"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1611": {
+        "techniqueId": "T1611",
+        "rules": [
+          {
+            "id": "rule-013",
+            "name": "Docker Container Escape Attempt"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1136.001": {
+        "techniqueId": "T1136.001",
+        "rules": [
+          {
+            "id": "rule-014",
+            "name": "Account Creation with Elevated Privileges"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1136.002": {
+        "techniqueId": "T1136.002",
+        "rules": [
+          {
+            "id": "rule-014",
+            "name": "Account Creation with Elevated Privileges"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1021.002": {
+        "techniqueId": "T1021.002",
+        "rules": [
+          {
+            "id": "rule-015",
+            "name": "Remote Service Installation"
+          },
+          {
+            "id": "rule-024",
+            "name": "WMI Lateral Movement Detection"
+          }
+        ],
+        "ruleCount": 2
+      },
+      "T1562.001": {
+        "techniqueId": "T1562.001",
+        "rules": [
+          {
+            "id": "rule-016",
+            "name": "Defense Evasion via Registry Modification"
+          },
+          {
+            "id": "rule-023",
+            "name": "Group Policy Modification for Defense Evasion"
+          }
+        ],
+        "ruleCount": 2
+      },
+      "T1566.001": {
+        "techniqueId": "T1566.001",
+        "rules": [
+          {
+            "id": "rule-018",
+            "name": "Suspicious Script Execution in Office Documents"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1204.002": {
+        "techniqueId": "T1204.002",
+        "rules": [
+          {
+            "id": "rule-018",
+            "name": "Suspicious Script Execution in Office Documents"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1071.004": {
+        "techniqueId": "T1071.004",
+        "rules": [
+          {
+            "id": "rule-019",
+            "name": "DNS Tunneling Detection"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1071.001": {
+        "techniqueId": "T1071.001",
+        "rules": [
+          {
+            "id": "rule-021",
+            "name": "BITS Job Creation for Data Exfiltration"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1567.002": {
+        "techniqueId": "T1567.002",
+        "rules": [
+          {
+            "id": "rule-021",
+            "name": "BITS Job Creation for Data Exfiltration"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1546.011": {
+        "techniqueId": "T1546.011",
+        "rules": [
+          {
+            "id": "rule-022",
+            "name": "Application Shimming for Persistence"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1484.001": {
+        "techniqueId": "T1484.001",
+        "rules": [
+          {
+            "id": "rule-023",
+            "name": "Group Policy Modification for Defense Evasion"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1574.001": {
+        "techniqueId": "T1574.001",
+        "rules": [
+          {
+            "id": "rule-025",
+            "name": "Supply Chain Attack - Suspicious DLL Sideloading"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1574.002": {
+        "techniqueId": "T1574.002",
+        "rules": [
+          {
+            "id": "rule-025",
+            "name": "Supply Chain Attack - Suspicious DLL Sideloading"
+          }
+        ],
+        "ruleCount": 1
+      },
+      "T1190": {
+        "techniqueId": "T1190",
+        "rules": [
+          {
+            "id": "rule-001",
+            "name": "Rule One"
+          },
+          {
+            "id": "rule-002",
+            "name": "Rule Two"
+          }
+        ],
+        "ruleCount": 2
+      }
+    },
+      {
+        "id": "rule-002",
+        "name": "Credential Dumping via Mimikatz",
+        "file": "windows/process_creation/mimikatz_detection.yaml",
+        "description": "Detects potential Mimikatz usage through command line parameters or named pipe creation.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "Critical",
+        "status": "production",
+        "categories": ["Credential Access"],
+        "authors": ["DFIR Team", "SOC Analyst"],
+        "date": "2024-03-20T00:00:00.000Z",
+        "modifiedDate": "2024-08-12T11:43:55.789Z",
+        "lastCommitId": "bc23de45fg67hi89jk01",
+        "falsePositives": ["Security testing", "Legitimate password recovery tools"],
+        "relatedTechniques": ["T1003", "T1003.001"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation.command_line: (*mimikatz* OR *sekurlsa* OR *kerberos* OR *lsadump* OR *privilege::debug* OR *sekurlsa::logonpasswords* OR *lsadump::sam*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-003",
+        "name": "Persistence via WMI Event Subscription",
+        "file": "windows/wmi/wmi_event_subscription.yaml",
+        "description": "Detects the creation of WMI event subscriptions, which could be used for persistence.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "Medium",
+        "status": "production",
+        "categories": ["Persistence"],
+        "authors": ["Threat Hunt Team"],
+        "date": "2024-04-05T00:00:00.000Z",
+        "modifiedDate": "2024-08-30T09:15:22.456Z",
+        "lastCommitId": "cd34ef56gh78ij90kl12",
+        "falsePositives": ["Legitimate monitoring software", "Administrative scripts"],
+        "relatedTechniques": ["T1546.003"],
+        "detectionSource": "wmi_activity",
+        "ruleType": "sigma",
+        "query": "select * from MSFT_WMIEventConsumer where Name = '__EventConsumer' | select * from MSFT_WMIEventSubscription where Name = '__EventSubscription'",
+        "queryFrequency": "1h",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-004",
+        "name": "Suspicious Process Creation via WMIC",
+        "file": "windows/process_creation/wmic_process_call_create.yaml",
+        "description": "Detects process creation via WMIC.exe, which could be used to bypass application whitelisting.",
+        "platforms": ["Windows"],
+        "validated": true, 
+        "severity": "Medium",
+        "status": "production",
+        "categories": ["Defense Evasion", "Execution"],
+        "authors": ["SOC Team"],
+        "date": "2024-02-28T00:00:00.000Z",
+        "modifiedDate": "2024-07-15T14:22:33.123Z",
+        "lastCommitId": "ef56gh78ij90kl12mn34",
+        "falsePositives": ["Administrative tasks", "IT automation"],
+        "relatedTechniques": ["T1047", "T1218"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation.parent_process: *wmic* AND process_creation.command_line: (*process call create* OR *process call create \"cmd*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-005",
+        "name": "Suspicious Execution from Temporary Directory",
+        "file": "windows/process_creation/temp_execution.yaml",
+        "description": "Detects execution of programs from temporary directories, which is commonly used by malware.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "Medium",
+        "status": "production",
+        "categories": ["Defense Evasion", "Execution"],
+        "authors": ["Threat Intel"],
+        "date": "2024-01-10T00:00:00.000Z",
+        "modifiedDate": "2024-09-05T16:37:42.567Z",
+        "lastCommitId": "gh78ij90kl12mn34op56",
+        "falsePositives": ["Software installers", "Temporary build processes"],
+        "relatedTechniques": ["T1059", "T1218"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation.image: (*\\\\Temp\\\\*.exe OR *\\\\Windows\\\\Temp\\\\*.exe OR *\\\\AppData\\\\Local\\\\Temp\\\\*.exe)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-006",
+        "name": "Rundll32 with Suspicious Arguments",
+        "file": "windows/process_creation/rundll32_suspicious.yaml",
+        "description": "Detects suspicious execution of rundll32.exe with uncommon arguments that may indicate malicious activity.",
+        "platforms": ["Windows"],
+        "validated": false,
+        "severity": "High",
+        "status": "test",
+        "categories": ["Defense Evasion", "Execution"],
+        "authors": ["Security Research"],
+        "date": "2024-05-12T00:00:00.000Z",
+        "modifiedDate": "2024-08-20T13:25:46.789Z",
+        "lastCommitId": "ij90kl12mn34op56qr78",
+        "falsePositives": ["Legitimate use of rundll32 by applications", "Software installation"],
+        "relatedTechniques": ["T1218.011"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation:image = 'C:\\\\Windows\\\\System32\\\\rundll32.exe' AND (process_creation:command_line = *javascript* OR process_creation:command_line = *vbscript* OR process_creation:command_line = *.dll,* OR process_creation:command_line = *\\\\AppData\\\\*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-007",
+        "name": "Potential Kerberoasting Activity",
+        "file": "windows/network_connection/kerberoasting.yaml",
+        "description": "Detects potential Kerberoasting activity by monitoring for suspicious Kerberos service ticket requests.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Credential Access"],
+        "authors": ["Active Directory Team"],
+        "date": "2024-04-18T00:00:00.000Z",
+        "modifiedDate": "2024-09-02T10:19:33.456Z",
+        "lastCommitId": "kl12mn34op56qr78st90",
+        "falsePositives": ["Service account management", "Password rotation scripts"],
+        "relatedTechniques": ["T1558.003"],
+        "detectionSource": "windows_event",
+        "ruleType": "sigma",
+        "query": "event_id: 4769 AND service_name: *$ AND ticket_encryption_type: 0x17",
+        "queryFrequency": "30m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-008",
+        "name": "Suspicious Registry Modification for Persistence",
+        "file": "windows/registry/registry_persistence.yaml",
+        "description": "Detects modifications to registry keys commonly used for persistence.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "Medium",
+        "status": "production",
+        "categories": ["Persistence"],
+        "authors": ["Registry Team"],
+        "date": "2024-03-05T00:00:00.000Z",
+        "modifiedDate": "2024-07-28T15:43:22.789Z",
+        "lastCommitId": "mn34op56qr78st90uv12",
+        "falsePositives": ["Software installation", "System updates"],
+        "relatedTechniques": ["T1547.001", "T1112"],
+        "detectionSource": "registry_event",
+        "ruleType": "sigma",
+        "query": "registry_path: (*\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run* OR *\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce* OR *\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\* OR *\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Shell Folders*)",
+        "queryFrequency": "30m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-009",
+        "name": "Web Shell Detection via Process Creation",
+        "file": "windows/process_creation/webshell_detection.yaml",
+        "description": "Detects potential web shell activity by monitoring for process creations from web server processes.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "Critical",
+        "status": "production",
+        "categories": ["Initial Access", "Persistence"],
+        "authors": ["Web Security Team"],
+        "date": "2024-02-22T00:00:00.000Z",
+        "modifiedDate": "2024-08-15T09:33:11.456Z",
+        "lastCommitId": "op56qr78st90uv12wx34",
+        "falsePositives": ["Web application management tasks", "Legitimate web server scripts"],
+        "relatedTechniques": ["T1505.003"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "(process_creation.parent_process: (*\\\\w3wp.exe OR *\\\\httpd.exe OR *\\\\nginx.exe OR *\\\\php-cgi.exe) AND process_creation.image: (*\\\\cmd.exe OR *\\\\powershell.exe OR *\\\\pwsh.exe OR *\\\\cscript.exe OR *\\\\wscript.exe OR *\\\\certutil.exe))",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-010",
+        "name": "Suspicious Network Connections",
+        "file": "windows/network_connection/suspicious_outbound.yaml",
+        "description": "Detects suspicious outbound network connections that may indicate command and control or data exfiltration.",
+        "platforms": ["Windows", "Linux", "macOS"],
+        "validated": false,
+        "severity": "Medium",
+        "status": "test",
+        "categories": ["Command and Control", "Exfiltration"],
+        "authors": ["Network Security"],
+        "date": "2024-05-30T00:00:00.000Z",
+        "modifiedDate": "2024-09-01T11:22:33.789Z",
+        "lastCommitId": "qr78st90uv12wx34yz56",
+        "falsePositives": ["Cloud service connections", "Legitimate API calls"],
+        "relatedTechniques": ["T1071", "T1571"],
+        "detectionSource": "network_connection",
+        "ruleType": "sigma",
+        "query": "network_connection.destination_port: (4444 OR 8080 OR 8443 OR 9001 OR 31337) AND network_connection.process: (*\\\\powershell.exe OR *\\\\cmd.exe OR *\\\\certutil.exe OR *\\\\bitsadmin.exe)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-011",
+        "name": "Linux Privilege Escalation via SUID Binary",
+        "file": "linux/process_creation/suid_binary_execution.yaml",
+        "description": "Detects potential privilege escalation attempts using SUID binaries on Linux systems.",
+        "platforms": ["Linux"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Privilege Escalation"],
+        "authors": ["Linux Security Team"],
+        "date": "2024-04-25T00:00:00.000Z",
+        "modifiedDate": "2024-08-05T16:27:43.456Z",
+        "lastCommitId": "st90uv12wx34yz56ab78",
+        "falsePositives": ["System administration tasks", "Security scanning"],
+        "relatedTechniques": ["T1548.001"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process:image = (/usr/bin/find OR /usr/bin/vim OR /usr/bin/nano OR /usr/bin/cp OR /usr/bin/chmod) AND process:command_line = *-p*",
+        "queryFrequency": "30m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-012",
+        "name": "macOS Persistence via Launch Agents",
+        "file": "macos/file_event/launchagent_creation.yaml",
+        "description": "Detects creation or modification of launch agent files, which could be used for persistence on macOS systems.",
+        "platforms": ["macOS"],
+        "validated": true,
+        "severity": "Medium",
+        "status": "production",
+        "categories": ["Persistence"],
+        "authors": ["macOS Security Team"],
+        "date": "2024-03-15T00:00:00.000Z",
+        "modifiedDate": "2024-07-22T13:45:11.789Z",
+        "lastCommitId": "uv12wx34yz56ab78cd90",
+        "falsePositives": ["Software installation", "Application updates"],
+        "relatedTechniques": ["T1543.001"],
+        "detectionSource": "file_event",
+        "ruleType": "sigma",
+        "query": "file_path: (/Users/*/Library/LaunchAgents/*.plist OR /Library/LaunchAgents/*.plist OR /Library/LaunchDaemons/*.plist)",
+        "queryFrequency": "1h",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-013",
+        "name": "Docker Container Escape Attempt",
+        "file": "linux/process_creation/docker_escape.yaml",
+        "description": "Detects potential Docker container escape attempts through suspicious mount or capability operations.",
+        "platforms": ["Linux"],
+        "validated": false,
+        "severity": "Critical",
+        "status": "test",
+        "categories": ["Privilege Escalation", "Defense Evasion"],
+        "authors": ["Container Security Team"],
+        "date": "2024-05-05T00:00:00.000Z",
+        "modifiedDate": "2024-08-25T10:33:45.123Z",
+        "lastCommitId": "wx34yz56ab78cd90ef12",
+        "falsePositives": ["Container management tools", "Security testing"],
+        "relatedTechniques": ["T1611"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process:command_line = (*mount /host* OR *docker.sock* OR *--privileged* OR *--cap-add=SYS_ADMIN* OR */proc/*/root*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-014",
+        "name": "Account Creation with Elevated Privileges",
+        "file": "windows/user_account/admin_account_creation.yaml",
+        "description": "Detects the creation of accounts with administrative privileges, which could be used for persistence.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Persistence", "Privilege Escalation"],
+        "authors": ["Active Directory Team", "SOC Analyst"],
+        "date": "2024-02-18T00:00:00.000Z",
+        "modifiedDate": "2024-09-12T08:11:33.456Z",
+        "lastCommitId": "yz56ab78cd90ef12gh34",
+        "falsePositives": ["Legitimate administrative account creation", "IT onboarding"],
+        "relatedTechniques": ["T1136.001", "T1136.002"],
+        "detectionSource": "windows_event",
+        "ruleType": "sigma",
+        "query": "(event_id: 4720 OR event_id: 4728) AND (group_name: *admin* OR group_name: *Domain Admins* OR group_name: *Enterprise Admins*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-015",
+        "name": "Remote Service Installation",
+        "file": "windows/process_creation/remote_service_installation.yaml",
+        "description": "Detects remote service installation, which could be used for lateral movement.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Lateral Movement", "Persistence"],
+        "authors": ["Detection Engineering"],
+        "date": "2024-04-10T00:00:00.000Z",
+        "modifiedDate": "2024-08-18T14:22:55.789Z",
+        "lastCommitId": "ab78cd90ef12gh34ij56",
+        "falsePositives": ["System administration", "Software deployment"],
+        "relatedTechniques": ["T1021.002"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation.image: (*\\\\sc.exe OR *\\\\net.exe OR *\\\\net1.exe) AND process_creation.command_line: (*\\\\\\\\* AND *create* AND *binpath*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-016",
+        "name": "Defense Evasion via Registry Modification",
+        "file": "windows/registry/defense_evasion_registry.yaml",
+        "description": "Detects modifications to registry keys commonly used for defense evasion.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "Medium",
+        "status": "production",
+        "categories": ["Defense Evasion"],
+        "authors": ["Threat Research"],
+        "date": "2024-03-22T00:00:00.000Z",
+        "modifiedDate": "2024-07-30T11:18:42.123Z",
+        "lastCommitId": "cd90ef12gh34ij56kl78",
+        "falsePositives": ["Security software configuration", "System management"],
+        "relatedTechniques": ["T1112", "T1562.001"],
+        "detectionSource": "registry_event",
+        "ruleType": "sigma",
+        "query": "registry_path: (*\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows Defender* OR *\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\SecurityHealthService* OR *\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\WinDefend*)",
+        "queryFrequency": "30m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-017",
+        "name": "Suspicious LSASS Process Access",
+        "file": "windows/process_access/lsass_access.yaml",
+        "description": "Detects suspicious access to the LSASS process, which could indicate credential dumping.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Credential Access"],
+        "authors": ["Memory Analysis Team"],
+        "date": "2024-02-25T00:00:00.000Z",
+        "modifiedDate": "2024-09-07T15:44:21.456Z",
+        "lastCommitId": "ef12gh34ij56kl78mn90",
+        "falsePositives": ["Security products", "Monitoring tools"],
+        "relatedTechniques": ["T1003.001"],
+        "detectionSource": "process_access",
+        "ruleType": "sigma",
+        "query": "target_process:image = 'C:\\\\Windows\\\\System32\\\\lsass.exe' AND process_access:granted_access & 0x10 AND NOT (process:image = ('C:\\\\Windows\\\\System32\\\\svchost.exe' OR 'C:\\\\Windows\\\\System32\\\\csrss.exe'))",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-018",
+        "name": "Suspicious Script Execution in Office Documents",
+        "file": "windows/process_creation/office_script_execution.yaml",
+        "description": "Detects suspicious script execution from Microsoft Office applications, which could indicate document-based attacks.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Initial Access", "Execution"],
+        "authors": ["Office Security Team"],
+        "date": "2024-05-02T00:00:00.000Z",
+        "modifiedDate": "2024-08-22T12:33:15.789Z",
+        "lastCommitId": "gh34ij56kl78mn90op12",
+        "falsePositives": ["Legitimate Office macros", "Automation scripts"],
+        "relatedTechniques": ["T1566.001", "T1204.002"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation.parent_process: (*\\\\WINWORD.EXE OR *\\\\EXCEL.EXE OR *\\\\POWERPNT.EXE OR *\\\\OUTLOOK.EXE) AND process_creation.image: (*\\\\cmd.exe OR *\\\\powershell.exe OR *\\\\wscript.exe OR *\\\\cscript.exe OR *\\\\bitsadmin.exe OR *\\\\certutil.exe)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-019",
+        "name": "DNS Tunneling Detection",
+        "file": "windows/dns_query/dns_tunneling.yaml",
+        "description": "Detects potential DNS tunneling by monitoring for unusual DNS query patterns.",
+        "platforms": ["Windows", "Linux", "macOS"],
+        "validated": false,
+        "severity": "Medium",
+        "status": "test",
+        "categories": ["Command and Control", "Exfiltration"],
+        "authors": ["Network Analysis Team"],
+        "date": "2024-04-15T00:00:00.000Z",
+        "modifiedDate": "2024-08-10T09:27:33.123Z",
+        "lastCommitId": "ij56kl78mn90op12qr34",
+        "falsePositives": ["Legitimate DNS resolution", "CDN services"],
+        "relatedTechniques": ["T1071.004"],
+        "detectionSource": "dns_query",
+        "ruleType": "sigma",
+        "query": "dns_query:query = *.* AND dns_query:length > 150",
+        "queryFrequency": "30m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-020",
+        "name": "Suspicious PowerShell Script Block Logging",
+        "file": "windows/powershell/powershell_script_block.yaml",
+        "description": "Detects suspicious PowerShell command execution through script block logging.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "Medium",
+        "status": "production",
+        "categories": ["Execution"],
+        "authors": ["PowerShell Security Team"],
+        "date": "2024-03-10T00:00:00.000Z",
+        "modifiedDate": "2024-07-25T14:55:22.456Z",
+        "lastCommitId": "kl78mn90op12qr34st56",
+        "falsePositives": ["Administrative scripts", "Monitoring tools"],
+        "relatedTechniques": ["T1059.001"],
+        "detectionSource": "powershell",
+        "ruleType": "sigma",
+        "query": "event_id: 4104 AND (script_block: *Invoke-Mimikatz* OR script_block: *Invoke-Expression* OR script_block: *IEX* OR script_block: *Net.WebClient* OR script_block: *DownloadString* OR script_block: *Set-MpPreference* OR script_block: *Add-MpPreference* OR script_block: *-Encoding* OR script_block: *-EncodedCommand*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-021",
+        "name": "BITS Job Creation for Data Exfiltration",
+        "file": "windows/bits_client/bits_exfiltration.yaml",
+        "description": "Detects BITS jobs with suspicious upload URLs, which could indicate data exfiltration.",
+        "platforms": ["Windows"],
+        "validated": false,
+        "severity": "Medium",
+        "status": "test",
+        "categories": ["Exfiltration", "Command and Control"],
+        "authors": ["Threat Hunt Team"],
+        "date": "2024-05-18T00:00:00.000Z",
+        "modifiedDate": "2024-08-28T10:19:45.789Z",
+        "lastCommitId": "mn90op12qr34st56uv78",
+        "falsePositives": ["Legitimate file uploads", "Software updates"],
+        "relatedTechniques": ["T1071.001", "T1567.002"],
+        "detectionSource": "bits_client",
+        "ruleType": "sigma",
+        "query": "bits_client.command_line: *Upload* AND NOT (bits_client.remote_url: (*microsoft.com* OR *windowsupdate.com* OR *windows.com*))",
+        "queryFrequency": "30m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-022",
+        "name": "Application Shimming for Persistence",
+        "file": "windows/registry/application_shimming.yaml",
+        "description": "Detects registry modifications related to application shimming, which could be used for persistence and compatibility bypass.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "Medium",
+        "status": "production",
+        "categories": ["Persistence", "Defense Evasion"],
+        "authors": ["Windows Security Team"],
+        "date": "2024-03-30T00:00:00.000Z",
+        "modifiedDate": "2024-07-18T16:33:21.123Z",
+        "lastCommitId": "op12qr34st56uv78wx90",
+        "falsePositives": ["Legitimate application compatibility", "Software installation"],
+        "relatedTechniques": ["T1546.011"],
+        "detectionSource": "registry_event",
+        "ruleType": "sigma",
+        "query": "registry_path: (*\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\AppCompatFlags\\\\Custom* OR *\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\AppCompatFlags\\\\InstalledSDB*)",
+        "queryFrequency": "1h",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-023",
+        "name": "Group Policy Modification for Defense Evasion",
+        "file": "windows/process_creation/gpo_modification.yaml",
+        "description": "Detects suspicious Group Policy modifications that could be used for defense evasion.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Defense Evasion", "Privilege Escalation"],
+        "authors": ["Domain Security Team"],
+        "date": "2024-04-08T00:00:00.000Z",
+        "modifiedDate": "2024-09-05T13:22:41.456Z",
+        "lastCommitId": "qr34st56uv78wx90yz12",
+        "falsePositives": ["Legitimate group policy management", "Domain controller administration"],
+        "relatedTechniques": ["T1562.001", "T1484.001"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation.image: (*\\\\gpupdate.exe OR *\\\\gpresult.exe) AND process_creation.command_line: (*-Force* OR */force*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-024",
+        "name": "WMI Lateral Movement Detection",
+        "file": "windows/wmi/wmi_lateral_movement.yaml",
+        "description": "Detects WMI process executions on remote systems, which could indicate lateral movement attempts.",
+        "platforms": ["Windows"],
+        "validated": true,
+        "severity": "High",
+        "status": "production",
+        "categories": ["Lateral Movement", "Execution"],
+        "authors": ["Lateral Movement Team"],
+        "date": "2024-02-20T00:00:00.000Z",
+        "modifiedDate": "2024-08-08T09:15:33.789Z",
+        "lastCommitId": "st56uv78wx90yz12ab34",
+        "falsePositives": ["System administration", "IT automation"],
+        "relatedTechniques": ["T1047", "T1021.002"],
+        "detectionSource": "process_creation",
+        "ruleType": "sigma",
+        "query": "process_creation.image: (*\\\\wmic.exe OR *\\\\PowerShell.exe) AND process_creation.command_line: (*node:* OR *compute* OR *wmi* OR *Win32_Process* OR *invoke-wmimethod* OR *-computername*)",
+        "queryFrequency": "15m",
+        "queryPeriod": "1d"
+      },
+      {
+        "id": "rule-025",
+        "name": "Supply Chain Attack - Suspicious DLL Sideloading",
+        "file": "windows/image_load/dll_sideloading.yaml",
+        "description": "Detects potential DLL sideloading from unusual locations, which could indicate supply chain attacks.",
+        "platforms": ["Windows"],
+        "validated": false,
+        "severity": "High",
+        "status": "test",
+        "categories": ["Initial Access", "Defense Evasion", "Persistence"],
+        "authors": ["Supply Chain Security Team"],
+        "date": "2024-05-25T00:00:00.000Z",
+        "modifiedDate": "2024-09-10T11:42:15.123Z",
+        "lastCommitId": "uv78wx90yz12ab34cd56",
+        "falsePositives": ["Developer environments", "Legitimate application behavior"],
+        "relatedTechniques": ["T1574.001", "T1574.002"],
+        "detectionSource": "image_load",
+        "ruleType": "sigma",
+        "query": "image_load.signed: 'false' AND (image_load.image_path: *\\\\AppData\\\\* OR image_load.image_path: *\\\\Temp\\\\* OR image_load.image_path: *\\\\Downloads\\\\*) AND NOT image_load.image_path: *\\\\Windows\\\\*",
+        "queryFrequency": "30m",
+        "queryPeriod": "1d"
+      }
+    ]
+  }
+}
